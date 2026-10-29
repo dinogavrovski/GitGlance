@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Profile from "./Profile";
 import RepoList from "./RepoList";
-import LangChart from "./LangChart";
+import SimpleBarChart from "../components/charts/BarChart";
+import StraightAnglePieChart from "../components/charts/PieChart";
 
 function Search() {
   const [username, setUsername] = useState("");
@@ -74,7 +75,8 @@ function Search() {
       {profile && <Profile user={profile} />}
       {topRepos.length > 0 && <RepoList repos={topRepos} />}
       {error && <p>Error: {error.message}</p>}
-      {profile && <LangChart repos={repos} />}
+      {profile && <SimpleBarChart repos={repos} />}
+      {profile && <StraightAnglePieChart repos={repos} />}
     </form>
   );
 }
