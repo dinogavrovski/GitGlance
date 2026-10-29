@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Profile from "./Profile";
 import RepoList from "./RepoList";
+import LangChart from "./LangChart";
 
 function Search() {
   const [username, setUsername] = useState("");
@@ -73,6 +74,7 @@ function Search() {
       {profile && <Profile user={profile} />}
       {topRepos.length > 0 && <RepoList repos={topRepos} />}
       {error && <p>Error: {error.message}</p>}
+      {profile && <LangChart repos={repos} />}
     </form>
   );
 }
