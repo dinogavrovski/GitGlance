@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function useGithubUser() {
+function useGithubUser(username) {
     const [profile, setProfile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -17,36 +17,52 @@ function useGithubUser() {
             }
         }
     }
-    async function fetchUsername(trimmed) {
-        setIsLoading(true);
-        setError(null);
-        setProfile(null);
-        setRepos([]);
-        try {
-            const [responseProfile, responseRepos] = await Promise.all([
-                fetch(`https://api.github.com/users/${trimmed}`),
-                fetch(`https://api.github.com/users/${trimmed}/repos?per_page=100`),
-            ]);
-            checkError(responseProfile, trimmed);
-            checkError(responseRepos, trimmed);
-            const [profileData, reposData] = await Promise.all([
-                responseProfile.json(),
-                responseRepos.json(),
-            ]);
-            setProfile(profileData);
-            setRepos(reposData);
-        } catch (error) {
-            if (error.name === "TypeError") {
-                setError(new Error("Network error. Please check your connection."));
-            } else setError(error);
-        } finally {
-            setIsLoading(false);
+    useEffect(() => {
+        if (!username) return;
+        let ignore = false;
+        async function fetchUsername(trimmed) {
+            setIsLoading(true);
+            setError(null);
+            setProfile(null);
+            setRepos([]);
+
+            try {
+                const [responseProfile, responseRepos] = await Promise.all([
+                    fetch(`https://api.github.com/users/${trimmed}`),
+                    fetch(`https://api.github.com/users/${trimmed}/repos?per_page=100`),
+                ]);
+                checkError(responseProfile, trimmed);
+                checkError(responseRepos, trimmed);
+                const [profileData, reposData] = await Promise.all([
+                    responseProfile.json(),
+                    responseRepos.json(),
+                ]);
+                if (!ignore) {
+
+                    setProfile(profileData);
+                    setRepos(reposData);
+                }
+            } catch (error) {
+                if (!ignore) {
+                    if (error.name === "TypeError") {
+                        setError(new Error("Network error. Please check your connection."));
+                    } else setError(error);
+                }
+            } finally {
+                if (!ignore) {
+                    setIsLoading(false);
+                }
+            }
         }
-    }
+        fetchUsername(username);
+        return () => {
+            ignore = true;
+        }
+    }, [username]);
     const topRepos = repos
         .toSorted((a, b) => b.stargazers_count - a.stargazers_count)
         .slice(0, 6);
-    return { profile, isLoading, error, repos, fetchUsername, topRepos };
+    return { profile, isLoading, error, repos, topRepos };
 }
 
 export default useGithubUser;

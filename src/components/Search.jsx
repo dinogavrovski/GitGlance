@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
-function Search({ onSearch, isLoading }) {
+function Search({ isLoading }) {
   const [username, setUsername] = useState("");
-
+  let navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     const trimmed = username.trim();
     if (trimmed === "") {
       return;
     }
-    onSearch(trimmed);
+    navigate(`/u/${trimmed}`);
   }
 
   return (
