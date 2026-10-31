@@ -52,18 +52,23 @@ function useGithubUser(username) {
                     setResetTime(resetTimeParsed);
                 }
                 checkError(responseProfile, trimmed);
-                checkError(responseRepos, trimmed);
+
                 const [profileData, reposData] = await Promise.all([
                     responseProfile.json(),
                     responseRepos.json(),
                 ]);
                 if (!ignore) {
+                    if (!responseRepos.ok) {
+                        setError(new Error("Failed to fetch repositories. Please try again later."));
+                        setRepos([]);
+                    } else {
+                        setRepos(reposData);
+                        sessionStorage.setItem(
+                            cacheKey,
+                            JSON.stringify({ profile: profileData, repos: reposData, savedAt: Date.now() })
+                        );
+                    }
                     setProfile(profileData);
-                    setRepos(reposData);
-                    sessionStorage.setItem(
-                        cacheKey,
-                        JSON.stringify({ profile: profileData, repos: reposData, savedAt: Date.now() })
-                    );
                 }
             } catch (error) {
                 if (!ignore) {

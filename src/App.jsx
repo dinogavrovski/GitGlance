@@ -30,7 +30,7 @@ function App() {
           {repos.length > 0 && <RepoList repos={topRepos} />}
           {repos.length > 0 && <SimpleBarChart repos={repos} />}
           {repos.length > 0 && <StraightAnglePieChart repos={repos} />}
-          {repos.length === 0 && profile && (
+          {repos.length === 0 && profile && !error && (
             <p>No public repositories found.</p>
           )}
           {remainingLimit !== null &&
