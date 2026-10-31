@@ -25,6 +25,7 @@ function App() {
     <div className="app">
       <header className="header">
         <Link to="/" className="brand">
+          <img className="brand-logo" src="/favicon.svg" alt="" />
           GitGlance
         </Link>
         <Search isLoading={isLoading} key={username} />

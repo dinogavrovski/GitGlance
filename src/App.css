@@ -21,9 +21,17 @@
 
 .brand {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 18px;
   font-weight: 700;
   color: var(--text-h);
+}
+
+.brand-logo {
+  width: 28px;
+  height: 28px;
 }
 
 .brand:hover {
