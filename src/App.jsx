@@ -9,8 +9,15 @@ import { useParams } from "react-router";
 
 function App() {
   const { username } = useParams();
-  const { profile, isLoading, error, repos, topRepos } =
-    useGithubUser(username);
+  const {
+    profile,
+    isLoading,
+    error,
+    repos,
+    topRepos,
+    remainingLimit,
+    resetTime,
+  } = useGithubUser(username);
 
   return (
     <>
@@ -23,6 +30,15 @@ function App() {
           {repos.length > 0 && <RepoList repos={topRepos} />}
           {profile && <SimpleBarChart repos={repos} />}
           {profile && <StraightAnglePieChart repos={repos} />}
+          {remainingLimit !== null &&
+            (remainingLimit > 0 ? (
+              <p>Remaining API requests: {remainingLimit}</p>
+            ) : (
+              <p>
+                Limit reached. Resets at:{" "}
+                {new Date(resetTime * 1000).toLocaleTimeString()}
+              </p>
+            ))}
         </>
       )}
     </>
