@@ -21,15 +21,18 @@ function App() {
 
   return (
     <>
-      <Search isLoading={isLoading} />
+      <Search isLoading={isLoading} key={username} />
       {username && (
         <>
           {isLoading && <p>Loading...</p>}
           {error && <p>Error: {error.message}</p>}
           {profile && <Profile user={profile} />}
           {repos.length > 0 && <RepoList repos={topRepos} />}
-          {profile && <SimpleBarChart repos={repos} />}
-          {profile && <StraightAnglePieChart repos={repos} />}
+          {repos.length > 0 && <SimpleBarChart repos={repos} />}
+          {repos.length > 0 && <StraightAnglePieChart repos={repos} />}
+          {repos.length === 0 && profile && (
+            <p>No public repositories found.</p>
+          )}
           {remainingLimit !== null &&
             (remainingLimit > 0 ? (
               <p>Remaining API requests: {remainingLimit}</p>

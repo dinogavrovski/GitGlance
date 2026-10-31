@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 function Search({ isLoading }) {
-  const [username, setUsername] = useState("");
+  const { username: placeholderUsername } = useParams();
+  const [username, setUsername] = useState(placeholderUsername || "");
   let navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
