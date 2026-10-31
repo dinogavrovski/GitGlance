@@ -1,0 +1,643 @@
+/* ---------- Layout ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.brand:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  text-align: center;
+}
+
+.footer--warning {
+  color: var(--danger);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+/* ---------- Search ---------- */
+
+.search {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text-h);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.search-button {
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--btn-primary);
+  border: 1px solid rgba(31, 35, 40, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-button:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
+}
+
+.search-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Landing ---------- */
+
+/* Fills the space between header and footer, so the page never scrolls */
+.landing {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.hero-badge {
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.hero-title {
+  /* scales with width and height, so short screens still fit */
+  font-size: clamp(30px, min(4.6vw, 7vh), 56px);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.hero-highlight {
+  color: var(--accent);
+}
+
+.hero-text {
+  max-width: 440px;
+  font-size: 17px;
+}
+
+/* Right half: example profiles */
+.examples {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 8px;
+}
+
+.examples-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.example-cloud {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
+  gap: 18px 24px;
+}
+
+/* Every other pill sits a little lower, so the group looks scattered */
+.example-cloud li:nth-child(even) {
+  margin-top: 22px;
+}
+
+.example-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px 10px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.example-pill:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow);
+}
+
+.example-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--skeleton);
+}
+
+.example-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.example-login {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.example-note {
+  font-size: 12px;
+  color: var(--text);
+}
+
+
+/* ---------- Messages ---------- */
+
+.error {
+  padding: 12px 16px;
+  color: var(--danger);
+  background: var(--danger-soft);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+}
+
+.empty {
+  padding: 32px 16px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Profile dashboard ---------- */
+
+/* Profile card on the left, charts and repos on the right */
+.dashboard {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* ---------- Profile ---------- */
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  width: 100%;
+}
+
+.profile-name {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.profile-login {
+  font-size: 15px;
+}
+
+.profile-bio {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.stat-label {
+  font-size: 13px;
+}
+
+/* ---------- Charts ---------- */
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.chart-title {
+  font-size: 15px;
+}
+
+/* Recharts fills this box; its height is fixed here, or flexible on big screens below */
+.chart-body {
+  height: 260px;
+  min-width: 0;
+}
+
+.chart-empty {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Recharts draws SVG; these override its default grey colors so both themes work */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--text);
+  font-size: 12px;
+}
+
+.recharts-cartesian-axis-line,
+.recharts-cartesian-grid line {
+  stroke: var(--border);
+}
+
+.recharts-legend-item-text {
+  color: var(--text) !important;
+  font-size: 12px;
+}
+
+.recharts-default-legend .recharts-legend-item {
+  margin-bottom: 2px;
+}
+
+/* ---------- Repositories ---------- */
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.repo-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.repo-name {
+  min-width: 0;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repo-stars {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+/* At most two lines of description, then "..." */
+.repo-desc {
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.repo-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.repo-lang::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lang-color, var(--border));
+}
+
+/* ---------- Loading skeleton ---------- */
+
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--skeleton) 25%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-avatar {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.skeleton-line {
+  width: 100%;
+  height: 14px;
+}
+
+.skeleton-line--lg {
+  width: 60%;
+  height: 24px;
+}
+
+.skeleton-line--md {
+  width: 50%;
+  height: 16px;
+}
+
+.skeleton-line--sm {
+  width: 35%;
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 92px;
+  padding: 14px;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* ---------- Desktop ---------- */
+
+@media (min-width: 1024px) {
+  .main:has(.dashboard) {
+    max-width: 1200px;
+  }
+
+  /* The profile card stays in view while you scroll through charts and repos */
+  .dashboard > .profile {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+/* ---------- Small screens ---------- */
+
+/* Tablets: profile card goes on top, laid out sideways to save height */
+@media (max-width: 1023px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .profile {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .profile-info {
+    align-items: flex-start;
+  }
+
+  .profile-stats {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 800px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .repo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Stack the two halves on narrow screens */
+  .landing {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 24px;
+  }
+
+  .hero {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 520px;
+  }
+
+  .examples {
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .main {
+    padding: 20px 16px 24px;
+  }
+
+  .hero {
+    gap: 12px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-text {
+    font-size: 15px;
+  }
+
+  .example-cloud {
+    gap: 10px 8px;
+  }
+
+  .example-cloud li:nth-child(even) {
+    margin-top: 12px;
+  }
+
+  .example-pill {
+    gap: 8px;
+    padding: 6px 12px 6px 6px;
+  }
+
+  .example-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .profile {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+  }
+
+  .profile-info {
+    align-items: center;
+  }
+
+  .profile-stats {
+    justify-content: center;
+  }
+
+  .repo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile .skeleton-line {
+    margin: 0 auto;
+  }
+}

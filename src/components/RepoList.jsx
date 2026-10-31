@@ -1,19 +1,36 @@
+import { getLanguageColor } from "./charts/chartTheme";
+
 function RepoList({ repos }) {
   return (
-    <div>
-      <h2>Top Repositories</h2>
-      <ul>
+    <section className="repos">
+      <h2 className="section-title">Top repositories</h2>
+      <ul className="repo-grid">
         {repos.map((repo) => (
-          <li key={repo.id}>
-            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-              {repo.name} - ⭐ {repo.stargazers_count}
-            </a>
-            <p>{repo.description ?? "No description"}</p>
-            <p>{repo.language ?? "Not specified"}</p>
+          <li key={repo.id} className="card repo-card">
+            <div className="repo-head">
+              <a
+                className="repo-name"
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {repo.name}
+              </a>
+              <span className="repo-stars">
+                ★ {repo.stargazers_count.toLocaleString()}
+              </span>
+            </div>
+            <p className="repo-desc">{repo.description ?? "No description"}</p>
+            <span
+              className="repo-lang"
+              style={{ "--lang-color": repo.language && getLanguageColor(repo.language) }}
+            >
+              {repo.language ?? "Not specified"}
+            </span>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 

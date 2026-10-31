@@ -15,15 +15,21 @@ function Search({ isLoading }) {
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="username">Username</label>
+    <form className="search" onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor="username" className="visually-hidden">
+        GitHub username
+      </label>
       <input
+        className="search-input"
         type="text"
         id="username"
+        placeholder="Enter a GitHub username"
+        autoComplete="off"
+        spellCheck={false}
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <button type="submit" disabled={isLoading}>
+      <button className="search-button" type="submit" disabled={isLoading}>
         Search
       </button>
     </form>
